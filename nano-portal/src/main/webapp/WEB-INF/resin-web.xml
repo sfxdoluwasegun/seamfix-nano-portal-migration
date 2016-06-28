@@ -1,0 +1,8 @@
+<web-app xmlns="http://caucho.com/ns/resin" xmlns:ee="urn:java:ee"
+   xmlns:resin="urn:java:com.caucho.resin">
+
+  <jms-connection-factory name="jms/factory" uri="resin:" />
+  
+  <jms-queue name="queue_mail" uri="file:path=WEB-INF/messaging.db" />
+
+</web-app>
