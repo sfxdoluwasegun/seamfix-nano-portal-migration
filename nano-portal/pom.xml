@@ -6,7 +6,7 @@
 	<artifactId>nano-portal</artifactId>
 	<packaging>war</packaging>
 	<name>nano-portal Portlet</name>
-	<version>0.0.4</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<build>
 		<finalName>nano-portal</finalName>
 		<plugins>
