@@ -49,9 +49,9 @@
                     <tbody>
 	                    <c:choose>
 	                    	<c:when test="${thresholdSettings ne null}">
-	                    		<c:forEach items="${thresholdSettings}" var="thresholdSetting" >
+	                    		<c:forEach items="${thresholdSettings}" var="thresholdSetting" varStatus="myIndex">
 	                    			<tr>
-	                    				<td>${thresholdSetting_rowNum}</td>
+	                    				<td>${myIndex.index+1}</td>
 				                        <td>${thresholdSetting.name}</td>
 				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${thresholdSetting.amount}" type="number"/></td>
 				                        <td>

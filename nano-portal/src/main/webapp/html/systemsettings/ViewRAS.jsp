@@ -69,9 +69,9 @@
                     <tbody>
 	                    <c:choose>
 	                    	<c:when test="${rasSettings ne null}">
-	                    		<c:forEach items="${rasSettings}" var="RASSetting" >
+	                    		<c:forEach items="${rasSettings}" var="RASSetting" varStatus="myIndex">
 	                    			<tr>
-	                    				<td>${RASSetting_rowNum}</td>
+	                    				<td>${myIndex.index+1}</td>
 				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${RASSetting.amount}" type="number"/></td>
 				                        <td>${RASSetting.serviceFee}%</td>
 				                        <td>${RASSetting.criteria.minAgeOnNetwork} Day(s)</td>

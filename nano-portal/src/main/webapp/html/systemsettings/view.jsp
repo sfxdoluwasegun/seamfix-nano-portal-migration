@@ -51,9 +51,9 @@
 						<tbody>
 							<c:choose>
 								<c:when test="${generalSettings ne null}">
-									<c:forEach items="${generalSettings}" var="generalSetting">
+									<c:forEach items="${generalSettings}" var="generalSetting" varStatus="myIndex">
 										<tr>
-											<td>${generalSetting_rowNum}</td>
+											<td>${myIndex.index+1}</td>
 											<td>${generalSetting.name}</td>
 											<td>${generalSetting.description}</td>
 											<td>${generalSetting.value}</td>
@@ -106,7 +106,25 @@
 </div>
 
 <script type="text/javascript">
-      $(function () {
+     /*  $(function () {
         $("#example1").DataTable();
-      });
+      }); */
+      
+      $(document).ready(function() {
+    	    var t = $('#example1').DataTable( {
+    	        "columnDefs": [ {
+    	            "searchable": false,
+    	            "orderable": false,
+    	            "targets": 0
+    	        } ],
+    	        "order": [[ 1, 'asc' ]]
+    	    } );
+    	 
+    	    t.on( 'order.dt search.dt', function () {
+    	        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    	            cell.innerHTML = i+1;
+    	        } );
+    	    } ).draw();
+    	} );
+      
     </script>

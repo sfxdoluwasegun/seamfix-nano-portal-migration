@@ -32,7 +32,7 @@
 
 <div class="box">
      <div class="box-header">
-          <h3 class="box-title">List of Airtime Pool Settings</h3>
+          <h3 class="box-title">List of Airtime Pool Alerts</h3>
      </div><!-- /.box-header -->
      <div class="box-body">
           <table id="poolTable" class="table table-bordered table-striped">
@@ -48,9 +48,9 @@
                     <tbody>
 	                    <c:choose>
 	                    	<c:when test="${airtimePoolSettings ne null}">
-	                    		<c:forEach items="${airtimePoolSettings}" var="airtimePoolSetting" >
+	                    		<c:forEach items="${airtimePoolSettings}" var="airtimePoolSetting" varStatus="myIndex" >
 	                    			<tr>
-	                    				<td>${airtimePoolSetting_rowNum}</td>
+	                    				<td>${myIndex.index+1}</td>
 				                        <td>${airtimePoolSetting.name}</td>
 				                        <td>${airtimePoolSetting.description}</td>
 				                        <td>${airtimePoolSetting.value}</td>

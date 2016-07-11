@@ -50,9 +50,9 @@
                     <tbody>
 	                    <c:choose>
 	                    	<c:when test="${settlementSettings ne null}">
-	                    		<c:forEach items="${settlementSettings}" var="settlementSetting" >
+	                    		<c:forEach items="${settlementSettings}" var="settlementSetting" varStatus="myIndex">
 	                    			<tr>
-	                    				<td>${settlementSetting_rowNum}</td>
+	                    				<td>${myIndex.index+1}</td>
 				                        <td>${settlementSetting.accountNumber}</td>
 				                        <td>${settlementSetting.percentage}%</td>
 				                        <td>${settlementSetting.bankData}</td>
