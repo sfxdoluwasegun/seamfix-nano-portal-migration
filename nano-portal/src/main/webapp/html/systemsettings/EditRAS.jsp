@@ -26,10 +26,10 @@
 					<div class="form-group" >
 	                      <!-- <label for="Amount">Amount</label> -->
 	                      <div class="alert alert-info alert-dismissable">
-	                      		<h4>AMOUNT NGN ${ras.amount}.00</h4>
+	                      		<h4>AMOUNT NGN ${ras.amount/100}.00</h4>
 	                      </div>
 	                      
-	                      <input type="hidden" class="form-control" id="Amount" required="required" name="Amount" value="${ras.amount}" placeholder="Enter Amount">
+	                      <input type="hidden" class="form-control" id="Amount" required="required" name="Amount" value="${ras.amount/100}" placeholder="Enter Amount">
 	                </div>
 	                <div class="form-group">
 	                      <label for="ServiceFee">ServiceFee</label>

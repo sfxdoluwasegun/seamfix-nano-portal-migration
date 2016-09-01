@@ -225,7 +225,7 @@ public class SettingService {
 			return amountIsInvalid;
 		}
 
-		if (Validator.isNull(getRASByAmount(amount))) {
+		if (Validator.isNull(getRASByAmount(amount*100))) {
 			return messageSuccessful;
 		}
 
@@ -284,7 +284,7 @@ public class SettingService {
 		crite.setMinTopUps(minTopUp);
 		crite.setMinTopUpsDuration(minTopUpDuration);
 		crite.setMinTopUpValue(minTopUpValue);
-		borrowableAmount.setAmount(amount);
+		borrowableAmount.setAmount(amount * 100);
 		borrowableAmount.setServiceFee(serviceFee);
 		borrowableAmount.setDeleted(false);
 		borrowableAmount.setCriteria(crite);
@@ -724,7 +724,7 @@ public class SettingService {
 		BorrowableAmount rasSetting = getRASByPK(pk);
 		RasCriteria criteria = new RasCriteria();
 
-		rasSetting.setAmount(amount);
+		rasSetting.setAmount(amount*100);
 		rasSetting.setServiceFee(serviceFee);
 		criteria.setMinAgeOnNetwork(minAgeOnNetwork);
 		criteria.setMinBalance(minBalance);
