@@ -8,6 +8,10 @@
 <portlet:defineObjects />
 <jsp:include page="/html/systemsettings/tabs.jsp" flush="true"/>
 
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/jquery.dataTables.min.js")%>" type="text/javascript" charset="utf-8"></script>
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/dataTables.bootstrap.min.js")%>" type="text/javascript" charset="utf-8"></script>
+
+
 <aui:button-row cssClass="airtime-settings">
 
 <portlet:actionURL var="AirtimePoolAddURL" name="showAirtimePoolAddPage" />
@@ -95,10 +99,22 @@
 
 
  <script type="text/javascript">
-      $(function () {
-      
-        	$("#poolTable").DataTable(); 
-      });
+ $(document).ready(function() {
+	    var t = $('#poolTable').DataTable( {
+	        "columnDefs": [ {
+	            "searchable": true,
+	            "orderable": true,
+	            "targets": 0
+	        } ],
+	        "order": [[ 1, 'asc' ]]
+	    } );
+	 
+	    t.on( 'order.dt search.dt', function () {
+	        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+	            cell.innerHTML = i+1;
+	        } );
+	    } ).draw();
+	} );
     </script>
 
 

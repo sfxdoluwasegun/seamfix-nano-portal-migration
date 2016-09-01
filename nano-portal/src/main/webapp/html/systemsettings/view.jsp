@@ -5,8 +5,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="javax.portlet.RenderResponse"%>
 
+
 <portlet:defineObjects />
 <jsp:include page="/html/systemsettings/tabs.jsp" flush="true" />
+    
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/jquery.dataTables.min.js")%>" type="text/javascript" charset="utf-8"></script>
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/dataTables.bootstrap.min.js")%>" type="text/javascript" charset="utf-8"></script>
 
 <aui:button-row cssClass="general-settings">
 
@@ -38,7 +42,7 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<table id="example1" class="table table-bordered table-striped">
+					<table id="settingTable" class="table table-bordered table-striped">
 						<thead>
 							<tr>
 								<th>S/N</th>
@@ -111,10 +115,10 @@
       }); */
       
       $(document).ready(function() {
-    	    var t = $('#example1').DataTable( {
+    	    var t = $('#settingTable').DataTable( {
     	        "columnDefs": [ {
-    	            "searchable": false,
-    	            "orderable": false,
+    	            "searchable": true,
+    	            "orderable": true,
     	            "targets": 0
     	        } ],
     	        "order": [[ 1, 'asc' ]]
@@ -128,3 +132,6 @@
     	} );
       
     </script>
+    
+
+

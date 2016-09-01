@@ -10,6 +10,10 @@
 <portlet:defineObjects />
 <jsp:include page="/html/systemsettings/tabs.jsp" flush="true"/>
 
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/jquery.dataTables.min.js")%>" type="text/javascript" charset="utf-8"></script>
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/dataTables.bootstrap.min.js")%>" type="text/javascript" charset="utf-8"></script>
+
+
 <aui:button-row cssClass="thresholds-settings">
 
 <portlet:actionURL var="thresholdAddURL" name="showThresholdAddPage" />
@@ -93,35 +97,21 @@
   
     
      <script type="text/javascript">
-      $(function () {
-        	$("#thresholdTable").DataTable(); 
-      });
+     $(document).ready(function() {
+ 	    var t = $('#thresholdTable').DataTable( {
+ 	        "columnDefs": [ {
+ 	            "searchable": true,
+ 	            "orderable": true,
+ 	            "targets": 0
+ 	        } ],
+ 	        "order": [[ 1, 'asc' ]]
+ 	    } );
+ 	 
+ 	    t.on( 'order.dt search.dt', function () {
+ 	        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+ 	            cell.innerHTML = i+1;
+ 	        } );
+ 	    } ).draw();
+ 	} );
     </script>
 
-	<%-- <display:table name="thresholdSettings" pagesize="10" id="thresholdSetting" requestURI="${refresh}" defaultorder="descending" sort="list" class="table table-bordered" style="overflow: visible">
-				<display:column title="S/N" >
-      				<c:out value="${thresholdSetting_rowNum}"/>
-    			</display:column>
-				
-				<display:column  title="Name" sortable="true" sortProperty="name">
-					${thresholdSetting.name}
-				</display:column>
-				<display:column  title="Amount" sortable="true" sortProperty="amount">
-					<fmt:formatNumber pattern="NGN ###,###,###.00" value="${thresholdSetting.amount}" type="number"/>
-				</display:column>
-				<display:column title="Period" sortable="true" headerClass="sortable" sortProperty="period">
-					${thresholdSetting.period}
-				</display:column>
-				<display:column title="Actions">
-				<div class="btn-group">
-                    
-                      <button type="button" class="btn btn-block btn-info" data-toggle="dropdown">
-                         &nbsp; Action  &nbsp; <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" >
-                        <li><a class="dropdowns__item" id="edit" href="javascript:if(confirm('Editing may cause Damage, Confirm you are sure you want to proceed.'))redirectEditWithHiddenInput('${EditThresholdURL}','settingsID', '${thresholdSetting.pk}')"> Edit </a></li>
-                        <li><a class="dropdowns__item" id="deactivate" href="javascript:if(confirm('Go Ahead to Deactivate?'))redirectDeactivateWithHiddenInput('${DeactivateThresholdURL}','settingsID', '${thresholdSetting.pk}')"> Deactivate </a></li>
-                      </ul>
-                 </div>
-				</display:column>
-	 </display:table> --%>
