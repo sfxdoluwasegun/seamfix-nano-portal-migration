@@ -76,7 +76,7 @@
 	                    		<c:forEach items="${rasSettings}" var="RASSetting" varStatus="myIndex">
 	                    			<tr>
 	                    				<td>${myIndex.index+1}</td>
-				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${RASSetting.amount}" type="number"/></td>
+				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${RASSetting.amount/100}" type="number"/></td>
 				                        <td>${RASSetting.serviceFee}%</td>
 				                        <td>${RASSetting.criteria.minAgeOnNetwork} Day(s)</td>
 				                        <td>${RASSetting.criteria.minBalance}</td>
