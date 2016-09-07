@@ -283,7 +283,7 @@ public class SettingService {
 		crite.setMinBalance(minBalance);
 		crite.setMinTopUps(minTopUp);
 		crite.setMinTopUpsDuration(minTopUpDuration);
-		crite.setMinTopUpValue(minTopUpValue);
+		crite.setMinTopUpValue(minTopUpValue * 100);
 		borrowableAmount.setAmount(amount * 100);
 		borrowableAmount.setServiceFee(serviceFee);
 		borrowableAmount.setDeleted(false);
@@ -730,7 +730,7 @@ public class SettingService {
 		criteria.setMinBalance(minBalance);
 		criteria.setMinTopUps(minTopUp);
 		criteria.setMinTopUpsDuration(minTopUpDuration);
-		criteria.setMinTopUpValue(minTopUpValue);
+		criteria.setMinTopUpValue(minTopUpValue * 100);
 		rasSetting.setCriteria(criteria);
 
 		queryManager.update(rasSetting);

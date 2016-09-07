@@ -41,20 +41,20 @@
 	                </div>
 	                <div class="form-group">
 	                      <label for="Balance">Balance</label>
-	                      <input type="text" class="form-control" id="Balance" required="required" name="Balance" title="Minimum Balance" value="${ras.criteria.minBalance}" placeholder="Enter Minimum Balance" value="0" >
+	                      <input type="text" class="form-control" id="Balance" required="required" name="Balance" title="Minimum Balance" value="${ras.criteria.minBalance}" placeholder="Enter Minimum Balance eg 0" value="0" >
 	                </div>
 	                <div class="form-group">
 	                      <label for="NoOfTopUps">NoOfTopUps</label>
-	                      <input type="text" class="form-control" id="NoOfTopUps" required="required" name="NoOfTopUps" title="Minimum Number of Top Ups" value="${ras.criteria.minTopUps}" placeholder="Enter Minimum Number Of Top Ups" value="3">
+	                      <input type="text" class="form-control" id="NoOfTopUps" required="required" name="NoOfTopUps" title="Minimum Number of Top Ups" value="${ras.criteria.minTopUps}" placeholder="Enter Minimum Number Of Top Ups 3g 3" value="3">
 	                </div>
 	                <div class="form-group">
 	                      <label for="TopUpsDuration">TopUpsDuration</label>
-	                      <input type="text" class="form-control" id="TopUpsDuration" required="required" name="TopUpsDuration" title="Minimum Top Ups Duration" value="${ras.criteria.minTopUpsDuration}" placeholder="Enter Minimum Top Up Duration" value="30">
+	                      <input type="text" class="form-control" id="TopUpsDuration" required="required" name="TopUpsDuration" title="Minimum Top Ups Duration" value="${ras.criteria.minTopUpsDuration}" placeholder="Enter Minimum Top Up Duration eg 30" value="30">
 	                </div>
 	                
 	                <div class="form-group">
 	                      <label for="TopUpsValue">TopUpsValue</label>
-	                      <input type="text" class="form-control" id="TopUpsValue" required="required" name="TopUpsValue" title="Minimum top Up Value" value="${ras.criteria.minTopUpValue}" placeholder="Enter Minimum Top Up Value">
+	                      <input type="text" class="form-control" id="TopUpsValue" required="required" name="TopUpsValue" title="Minimum top Up Value" value="${ras.criteria.minTopUpValue/100}" placeholder="Enter Minimum Recharge Amount eg 150">
 	                </div>
 	                </div> <!-- box body -->
 					

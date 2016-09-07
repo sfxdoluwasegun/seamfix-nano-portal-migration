@@ -82,7 +82,7 @@
 				                        <td>${RASSetting.criteria.minBalance}</td>
 				                        <td>${RASSetting.criteria.minTopUps}</td>
 				                        <td>${RASSetting.criteria.minTopUpsDuration} Day(s)</td>
-				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${RASSetting.criteria.minTopUpValue}" type="number"/></td>
+				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${RASSetting.criteria.minTopUpValue/100}" type="number"/></td>
 				                        <td>
 				                        	<div class="btn-group">
 							                      <button type="button" class="btn btn-block btn-info" data-toggle="dropdown">
