@@ -5,8 +5,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="javax.portlet.RenderResponse"%>
 
+
 <portlet:defineObjects />
 <jsp:include page="/html/systemsettings/tabs.jsp" flush="true" />
+    
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/jquery.dataTables.min.js")%>" type="text/javascript" charset="utf-8"></script>
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/dataTables.bootstrap.min.js")%>" type="text/javascript" charset="utf-8"></script>
 
 <aui:button-row cssClass="general-settings">
 
@@ -38,7 +42,7 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<table id="example1" class="table table-bordered table-striped">
+					<table id="settingTable" class="table table-bordered table-striped">
 						<thead>
 							<tr>
 								<th>S/N</th>
@@ -51,9 +55,9 @@
 						<tbody>
 							<c:choose>
 								<c:when test="${generalSettings ne null}">
-									<c:forEach items="${generalSettings}" var="generalSetting">
+									<c:forEach items="${generalSettings}" var="generalSetting" varStatus="myIndex">
 										<tr>
-											<td>${generalSetting_rowNum}</td>
+											<td>${myIndex.index+1}</td>
 											<td>${generalSetting.name}</td>
 											<td>${generalSetting.description}</td>
 											<td>${generalSetting.value}</td>
@@ -106,7 +110,28 @@
 </div>
 
 <script type="text/javascript">
-      $(function () {
+     /*  $(function () {
         $("#example1").DataTable();
-      });
+      }); */
+      
+      $(document).ready(function() {
+    	    var t = $('#settingTable').DataTable( {
+    	        "columnDefs": [ {
+    	            "searchable": true,
+    	            "orderable": true,
+    	            "targets": 0
+    	        } ],
+    	        "order": [[ 1, 'asc' ]]
+    	    } );
+    	 
+    	    t.on( 'order.dt search.dt', function () {
+    	        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+    	            cell.innerHTML = i+1;
+    	        } );
+    	    } ).draw();
+    	} );
+      
     </script>
+    
+
+

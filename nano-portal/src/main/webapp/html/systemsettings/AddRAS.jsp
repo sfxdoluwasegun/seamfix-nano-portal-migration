@@ -29,7 +29,7 @@
 	                      		<h4>AMOUNT NGN ${amount}.00</h4>
 	                      </div>
 	                      
-	                      <input type="hidden" class="form-control" id="Amount" required="required" name="Amount" placeholder="RAS criterion Amount" value=${amount}>
+	                      <input type="hidden" class="form-control" id="Amount" required="required" name="Amount" placeholder="RAS criterion Amount" value="${amount}">
 	                </div>
 	                <div class="form-group">
 	                      <label for="ServiceFee">Service Fee</label>

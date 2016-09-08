@@ -16,7 +16,7 @@
 	<div class= "row">
 	<jsp:include page="/html/systemsettings/tabs.jsp" flush="true"/>
 		<div class="col-md-6 col-md-offset-2">
-			<h1>Edit Airtime Pool Setting</h1>
+			<h1>Edit Airtime Pool Alert</h1>
 			
 				<form role="form" class="form-horizontal" method="post" action="<%= EditAirtimePoolURL%>" name="<portlet:namespace />AirtimePoolForm">
 				<input type="hidden" id="settingsID" name="pk" value="${setting.pk}">

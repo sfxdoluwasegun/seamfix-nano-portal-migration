@@ -8,6 +8,10 @@
 <portlet:defineObjects />
 <jsp:include page="/html/systemsettings/tabs.jsp" flush="true"/>
 
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/jquery.dataTables.min.js")%>" type="text/javascript" charset="utf-8"></script>
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/dataTables.bootstrap.min.js")%>" type="text/javascript" charset="utf-8"></script>
+
+
 <aui:button-row cssClass="airtime-settings">
 
 <portlet:actionURL var="AirtimePoolAddURL" name="showAirtimePoolAddPage" />
@@ -32,7 +36,7 @@
 
 <div class="box">
      <div class="box-header">
-          <h3 class="box-title">List of Airtime Pool Settings</h3>
+          <h3 class="box-title">List of Airtime Pool Alerts</h3>
      </div><!-- /.box-header -->
      <div class="box-body">
           <table id="poolTable" class="table table-bordered table-striped">
@@ -48,9 +52,9 @@
                     <tbody>
 	                    <c:choose>
 	                    	<c:when test="${airtimePoolSettings ne null}">
-	                    		<c:forEach items="${airtimePoolSettings}" var="airtimePoolSetting" >
+	                    		<c:forEach items="${airtimePoolSettings}" var="airtimePoolSetting" varStatus="myIndex" >
 	                    			<tr>
-	                    				<td>${airtimePoolSetting_rowNum}</td>
+	                    				<td>${myIndex.index+1}</td>
 				                        <td>${airtimePoolSetting.name}</td>
 				                        <td>${airtimePoolSetting.description}</td>
 				                        <td>${airtimePoolSetting.value}</td>
@@ -95,10 +99,22 @@
 
 
  <script type="text/javascript">
-      $(function () {
-      
-        	$("#poolTable").DataTable(); 
-      });
+ $(document).ready(function() {
+	    var t = $('#poolTable').DataTable( {
+	        "columnDefs": [ {
+	            "searchable": true,
+	            "orderable": true,
+	            "targets": 0
+	        } ],
+	        "order": [[ 1, 'asc' ]]
+	    } );
+	 
+	    t.on( 'order.dt search.dt', function () {
+	        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+	            cell.innerHTML = i+1;
+	        } );
+	    } ).draw();
+	} );
     </script>
 
 

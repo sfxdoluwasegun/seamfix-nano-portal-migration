@@ -8,7 +8,7 @@
 <portlet:actionURL var="settlementListViewURL" name="showSettlementList" />
 
 
-<liferay-ui:tabs names="General Settings,Airtime Pool Settings,RAS Criteria,Threshold Settings, Settlement Configuration" refresh="false" 
+<liferay-ui:tabs names="General Settings,Airtime Pool Alerts,RAS Criteria,Threshold Settings, Settlement Configuration" refresh="false" 
 	tabsValues="general,pool,ras,threshold,settlement" url0="${generalIndexURL}" url1="${poolIndexURL}" url2="${rasIndexURL}" url3="${thresholdIndexURL}" url4="${settlementListViewURL}" 
 	value="${selectedTab}" param="tab" >
 	

@@ -9,6 +9,10 @@
 <portlet:defineObjects />
 <jsp:include page="/html/systemsettings/tabs.jsp" flush="true"/>
 
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/jquery.dataTables.min.js")%>" type="text/javascript" charset="utf-8"></script>
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/dataTables.bootstrap.min.js")%>" type="text/javascript" charset="utf-8"></script>
+
+
 <aui:button-row cssClass="thresholds-settings">
 
 <portlet:actionURL var="settlementAddURL" name="showSettlementAddPage" />
@@ -50,9 +54,9 @@
                     <tbody>
 	                    <c:choose>
 	                    	<c:when test="${settlementSettings ne null}">
-	                    		<c:forEach items="${settlementSettings}" var="settlementSetting" >
+	                    		<c:forEach items="${settlementSettings}" var="settlementSetting" varStatus="myIndex">
 	                    			<tr>
-	                    				<td>${settlementSetting_rowNum}</td>
+	                    				<td>${myIndex.index+1}</td>
 				                        <td>${settlementSetting.accountNumber}</td>
 				                        <td>${settlementSetting.percentage}%</td>
 				                        <td>${settlementSetting.bankData}</td>
@@ -104,41 +108,21 @@
     
     
      <script type="text/javascript">
-      $(function () {
-        	$("#settlementTable").DataTable(); 
-      });
+     $(document).ready(function() {
+ 	    var t = $('#settlementTable').DataTable( {
+ 	        "columnDefs": [ {
+ 	            "searchable": true,
+ 	            "orderable": true,
+ 	            "targets": 0
+ 	        } ],
+ 	        "order": [[ 1, 'asc' ]]
+ 	    } );
+ 	 
+ 	    t.on( 'order.dt search.dt', function () {
+ 	        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+ 	            cell.innerHTML = i+1;
+ 	        } );
+ 	    } ).draw();
+ 	} );
     </script>
 
-	<%-- <display:table name="settlementSettings" pagesize="10" requestURI="${refresh}" defaultorder="descending" sort="list" id="settlementSetting" class="table table-bordered" style="overflow: visible">
-				<display:column title="S/N" >
-      				<c:out value="${settlementSetting_rowNum}"/>
-    			</display:column>
-				
-				<display:column  title="AccountNumber" sortable="true" sortProperty="accountNumber">
-					${settlementSetting.accountNumber}
-				</display:column>
-				<display:column  title="Percentage" sortable="true" sortProperty="percentage">
-					${settlementSetting.percentage}%
-				</display:column>
-				<display:column title="BankData" sortable="true" headerClass="sortable" sortProperty="bankData">
-					${settlementSetting.bankData}
-				</display:column>
-				<display:column  title="SettlementType" sortable="true" sortProperty="settlementType">
-					${settlementSetting.settlementType}
-				</display:column>
-				<display:column title="Creditor" sortable="true" headerClass="sortable" sortProperty="creditor">
-					${settlementSetting.creditor}
-				</display:column>
-				<display:column title="Actions">
-				<div class="btn-group">
-                     
-                      <button  type="button" class="btn btn-block btn-info" data-toggle="dropdown">
-                         &nbsp; Action  &nbsp;  <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdowns__item" id="edit" href="javascript:if(confirm('Editing may cause Damage, Confirm you are sure you want to proceed.'))redirectEditWithHiddenInput('${EditSettlementURL}','settingsID', '${settlementSetting.pk}')"> Edit </a></li>
-                        <li><a class="dropdowns__item" id="deactivate" href="javascript:if(confirm('Go Ahead to Deactivate?'))redirectDeactivateWithHiddenInput('${DeactivateSettlementURL}','settingsID', '${settlementSetting.pk}')"> Deactivate </a></li>
-                      </ul>
-                 </div>
-				</display:column>
-	 </display:table> --%>

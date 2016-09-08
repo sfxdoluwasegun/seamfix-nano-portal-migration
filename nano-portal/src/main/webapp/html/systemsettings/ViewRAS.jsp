@@ -9,6 +9,10 @@
 <portlet:defineObjects />
 <jsp:include page="/html/systemsettings/tabs.jsp" flush="true"/>
 
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/jquery.dataTables.min.js")%>" type="text/javascript" charset="utf-8"></script>
+<script src="<%=response.encodeURL(request.getContextPath() + "/js/dataTables.bootstrap.min.js")%>" type="text/javascript" charset="utf-8"></script>
+
+
 <aui:button-row cssClass="RAS-settings">
 
 <portlet:actionURL var="RASAddURL" name="showRASAddPage" />
@@ -69,16 +73,16 @@
                     <tbody>
 	                    <c:choose>
 	                    	<c:when test="${rasSettings ne null}">
-	                    		<c:forEach items="${rasSettings}" var="RASSetting" >
+	                    		<c:forEach items="${rasSettings}" var="RASSetting" varStatus="myIndex">
 	                    			<tr>
-	                    				<td>${RASSetting_rowNum}</td>
-				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${RASSetting.amount}" type="number"/></td>
+	                    				<td>${myIndex.index+1}</td>
+				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${RASSetting.amount/100}" type="number"/></td>
 				                        <td>${RASSetting.serviceFee}%</td>
 				                        <td>${RASSetting.criteria.minAgeOnNetwork} Day(s)</td>
 				                        <td>${RASSetting.criteria.minBalance}</td>
 				                        <td>${RASSetting.criteria.minTopUps}</td>
 				                        <td>${RASSetting.criteria.minTopUpsDuration} Day(s)</td>
-				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${RASSetting.criteria.minTopUpValue}" type="number"/></td>
+				                        <td><fmt:formatNumber pattern="NGN ###,###,###.00" value="${RASSetting.criteria.minTopUpValue/100}" type="number"/></td>
 				                        <td>
 				                        	<div class="btn-group">
 							                      <button type="button" class="btn btn-block btn-info" data-toggle="dropdown">
@@ -128,9 +132,22 @@
 
 
  <script type="text/javascript">
-      $(function () {
-        	$("#rasTable").DataTable(); 
-      });
+ $(document).ready(function() {
+	    var t = $('#rasTable').DataTable( {
+	        "columnDefs": [ {
+	            "searchable": true,
+	            "orderable": true,
+	            "targets": 0
+	        } ],
+	        "order": [[ 1, 'asc' ]]
+	    } );
+	 
+	    t.on( 'order.dt search.dt', function () {
+	        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+	            cell.innerHTML = i+1;
+	        } );
+	    } ).draw();
+	} );
     </script>
 
 
